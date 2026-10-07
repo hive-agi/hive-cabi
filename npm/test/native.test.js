@@ -45,6 +45,24 @@ test('portable oracle: ten byte-identical JVM reference lines via koffi workers'
   } finally { Object.values(ports).forEach(port => port.close()); }
 });
 
+test('live craft libraries answer ops and a program call', async t => {
+  for (const [library, op] of [['photocraft', 'methods'], ['vectorcraft', 'ui.tool.list']]) {
+    if (!existsSync(artifact(library))) {
+      t.diagnostic(`SKIP ${library}: missing live native artifact (card 20261007162504-2033bb50)`);
+      continue;
+    }
+    const port = createLoader().openPort(spec(library));
+    try {
+      const started = performance.now();
+      const catalog = await port.call('ops', {});
+      assert.equal(catalog.ok, true, `${library}: ops`);
+      const answer = await port.call(op, {});
+      assert.equal(answer.ok, true, `${library}: ${op}`);
+      t.diagnostic(`${library} worker ops+${op} ${Math.round(performance.now() - started)}ms`);
+    } finally { port.close(); }
+  }
+});
+
 test('tool names stay inside the MCP charset', () => {
   assert.equal(toolName('photocraft', 'engine.execute'), 'photocraft_engine_execute');
   assert.equal(toolName('vectorcraft', 'ui.tool.list'), 'vectorcraft_ui_tool_list');
