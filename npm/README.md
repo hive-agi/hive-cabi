@@ -1,0 +1,3 @@
+# @hive-agi/hive-cabi
+
+Node 22+ loader for hive-cabi/v1. `npm install`, then `createLoader().openPort(spec)` returns a port with asynchronous `call(op, request)` returning an envelope. The `ops` catalog projects to `catalogTools(port)`. Native calls run inside a per-library worker and time out by terminating it; a timed-out port cannot be reused. No native build is bundled: point `native/artifacts` at your shared library or Go js/wasm artifact. `node/ffi` uses koffi 3.3.2; `node/wasm` loads Go's `wasm_exec.js` next to the wasm file unless `exec` is specified. `npm test && npm run typecheck` verifies the host. For the CLJS adapter, supply a project build alias depending on `io.github.hive-agi/hive-spi {:local/root "../../../hive-spi-wt/native-contract"}` until SPI lands.
