@@ -1,0 +1,9 @@
+{:addon/id "hive.cabi"
+ :addon/type :native
+ :addon/init-ns "hive-cabi.init"
+ :addon/init-fn "create-addon"
+ :addon/trust-class :foss
+ :addon/capabilities #{:native/loader}
+ :addon/lifecycle {:policy :lazy :idle-ms 900000}
+ :addon/maturity :experimental
+ :addon/description "JVM native hive-cabi/v1 loader"}

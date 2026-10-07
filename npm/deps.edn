@@ -1,0 +1,5 @@
+{:paths ["../src" "../test"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.6"}
+        org.clojure/clojurescript {:mvn/version "1.12.134"}
+        io.github.hive-agi/hive-spi {:mvn/version "1.4.4"}}
+ :aliases {:build {:main-opts ["-m" "cljs.main" "-co" "{:target :nodejs :output-to \"build/native.js\" :output-dir \"build/out\"}" "-c" "hive-cabi.node.loader"]}}}
