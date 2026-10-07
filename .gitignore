@@ -1,0 +1,7 @@
+.cpcache/
+.nrepl-port
+target/
+npm/node_modules/
+npm/build/
+.clj-kondo/.cache/
+.lsp/
